@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
 
+db = SQLAlchemy()
+ 
 class Person(db.Model):
     __tablename__ = "person"
     id = db.Column(db.Integer, primary_key=True)
@@ -47,6 +48,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100))
     email = db.Column(db.String(100))
+    
 
 class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)

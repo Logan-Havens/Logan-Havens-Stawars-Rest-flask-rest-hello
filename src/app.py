@@ -40,19 +40,20 @@ def sitemap():
 def get_people():
     people = Person.query.all()
     print (people)
-    return jsonify({"people":people}), 200
+    serialized_people = [p.serialize() for p in people]
+    return jsonify({"people":serialized_people}), 200
 
 @app.route('/people/<int:person_id>', methods=['GET'])
 def get_person(Person_id):
     person = Person.query.get(Person_id)
     if person is None:
         return jsonify({"message": "Person not found"}), 404
-    return jsonify(Person.serialize()), 200
+    return jsonify(person.serialize()), 200
 
 @app.route('/planets', methods=['GET'])
 def get_planets():
     planets = Planet.query.all()
-    serialized_planets = [Planet.serialize() for planet in planets]
+    serialized_planets = [planet.serialize() for planet in planets]
     return jsonify(serialized_planets), 200
 
 @app.route('/planets/<int:planet_id>', methods=['GET'])
